@@ -21,3 +21,7 @@ app.post("/submit", async (req, res) => {
         res.status(500).send("Failed to store submission.");
     }
 });
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
