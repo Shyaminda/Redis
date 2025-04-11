@@ -5,15 +5,16 @@ const app = express();
 app.use(express.json());
 
 const client = createClient();
-client.connect();
+client.on('error', (err) => console.log('Redis Client Error', err));
 
 app.post("/submit", async (req, res) => {
     const problemId = req.body.problemId;
     const code = req.body.code;
     const language = req.body.language;
+    const userId = req.body.userId;
 
     try {
-        await client.lPush("problems", JSON.stringify({ code, language, problemId }));
+        await client.lPush("problems", JSON.stringify({ code, language, problemId, userId }));
         // Store in the database
         res.status(200).send("Submission received and stored.");
     } catch (error) {
@@ -22,6 +23,17 @@ app.post("/submit", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-});
+async function startServer() {
+    try {
+        await client.connect();
+        console.log("Connected to Redis");
+
+        app.listen(3000, () => {
+            console.log("Server is running on port 3000");
+        });
+    } catch (error) {
+        console.error("Failed to connect to Redis", error);
+    }
+}
+
+startServer();
