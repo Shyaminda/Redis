@@ -22,7 +22,7 @@ This project demonstrates a clean, modular architecture for a code submission ba
 </details>
 
 <details>
-  <summary>Screenshot 1: Redis worker</summary>
+  <summary>Screenshot: Redis worker</summary>
   <img src="worker/public/assets/images/image1.png" alt="Screenshot 2" />
 </details>
 
