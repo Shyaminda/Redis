@@ -30,7 +30,7 @@ async function startWorker() {
                 await processSubmission(submission.element);
             } catch (error) {
                 console.error("Error processing submission:", error);
-                // Implement your error handling logic here. For example, you might want to push
+                // Implement the error handling logic here. push back
                 // the submission back onto the queue or log the error to a file.
             }
         }
