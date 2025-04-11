@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 const client = createClient();
-client.on('error', (err) => console.log('Redis Client Error', err));
+client.connect();
 
 app.post("/submit", async (req, res) => {
     const problemId = req.body.problemId;
